@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { Container, Form, Label, Input, LabelError, Button, LabelLogin, Strong } from './styles';
-//import api from '../../conexãoBackend/api';
 import axios from 'axios';
 
 function CadastrarUsuarios() {
