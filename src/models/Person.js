@@ -11,6 +11,3 @@ const DataSchema = new mongoose.Schema({
 const usuarios = mongoose.model('Usuarios', DataSchema);
 
 module.exports = usuarios;
-
-
-

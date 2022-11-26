@@ -2,16 +2,13 @@ const express = require('express');
 
 const routes = express.Router();
 
-const Usuario = require('../controllers/usuarios.controllers')
+const User = require('../controllers/usersControllers')
 
-routes.get('/', Usuario.index);
-
-routes.post('/api/cadastro', Usuario.create);
-routes.get('/api/cadastro', Usuario.index);
-routes.get('/api/details/:_id', Usuario.detalhes);
-routes.delete('/api/cadastro/:_id', Usuario.delete);
-routes.patch('/api/cadastro/:_id', Usuario.update);
-
+routes.post('/api/register', User.create);
+routes.get('/api/register', User.index);
+routes.get('/api/details/:_id', User.details);
+routes.patch('/api/register/:_id', User.update);
+routes.delete('/api/register/:_id', User.delete);
 
 
 module.exports = routes;
