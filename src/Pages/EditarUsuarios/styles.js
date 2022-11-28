@@ -31,7 +31,6 @@ export const Label = styled.label`
 export const LabelLogin = styled.label`
   font-size: 16px;
   color: #676767;
-  font-weight: 550;
 `
 export const LabelError = styled.label`
   font-size: 14px;

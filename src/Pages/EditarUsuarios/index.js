@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useHistory, Link, useParams } from 'react-router-dom';
 import { Container, Form, Label, Input, LabelError, Button, LabelLogin, Strong } from './styles';
 import axios from 'axios';
 
@@ -11,35 +11,49 @@ function CadastrarUsuarios() {
     const [nascimento, setNascimento] = useState();
     const [error, setError] = useState();
 
-   const submitRegister = (e) => {
+    const { idUsuario } = useParams();
+
+    async function getUsers() {
+        const response = await axios.get('/api/details/' + idUsuario);
+       // console.log(response.data);
+        setNome(response.data.nome);
+        setCpf(response.data.cpf);
+        setNascimento(response.data.nascimento);
+        
+    }
+
+    useEffect(() => {
+        getUsers();
+    }, []);
+
+   
+
+    const submitRegister = (e) => {
         e.preventDefault();
-        if (!nome | !cpf | !nascimento) {
-            setError("Preencha todos os campos");
-            return;
-        } 
 
         const data = {
             nome: nome,
             cpf: cpf,
             nascimento: nascimento,
+            _id: idUsuario,
         }
-    
-         axios.post('/api/register', data)
-         .then(res => {
-            if(res.status === 201){
-                history.push('/listar'); 
-            }else{
-                alert('Não foi possivel cadastrar usuario');
-            }
-            
-         });
+
+        axios.put('/api/register/' + idUsuario, data)
+            .then(res => {
+                if (res.status === 200) {
+                    history.push('/listar');
+                } else {
+                    alert('Não foi possivel atualizar o usuario');
+                }
+
+            });
 
     }
 
 
     return (
         <Container>
-            <Label>Cadastre um Usuario</Label>
+            <Label>Editar Usuario</Label>
             <Form onSubmit={submitRegister} >
                 <Input
                     type='text'
@@ -47,11 +61,9 @@ function CadastrarUsuarios() {
                     value={nome}
                     onChange={(e) => [setNome(e.target.value), setError("")]}
                 />
-                <Input
-                    type='number'
-                    placeholder='Digite seu CPF'
+                <Input disabled
                     value={cpf}
-                    onChange={(e) => [setCpf(e.target.value), setError("")]}
+
                 />
 
                 <Input
@@ -62,7 +74,7 @@ function CadastrarUsuarios() {
                 />
 
                 <LabelError>{error}</LabelError>
-                <Button type='submit'>Cadastrar</Button>
+                <Button type='submit'>Editar</Button>
                 <LabelLogin>
                     Lista de Usuarios Cadastrados
                     <Strong>
