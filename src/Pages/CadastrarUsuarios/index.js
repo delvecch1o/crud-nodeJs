@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { Container, Form, Label, Input, LabelError, Button, LabelLogin, Strong } from './styles';
-import axios from 'axios';
+import axios from 'axios'; 
 
 function CadastrarUsuarios() {
 
@@ -27,6 +27,7 @@ function CadastrarUsuarios() {
          axios.post('/api/register', data)
          .then(res => {
             if(res.status === 201){
+                alert("Usuario Cadastrado com sucesso");
                 history.push('/listar'); 
             }else{
                 alert('Não foi possivel cadastrar usuario');
