@@ -20,6 +20,7 @@ function App() {
           <Route exact path="/" component={CadastrarUsuarios} />
           <Route exact path="/listar" component={ListarUsuarios} />
           <Route exact path="/editar/:idUsuario" component={EditarUsuarios} />
+          <Route path="*" component={CadastrarUsuarios} />
 
         </Switch>
       </Router>

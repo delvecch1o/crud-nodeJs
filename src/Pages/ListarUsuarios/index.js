@@ -21,14 +21,12 @@ function ListarUsuarios() {
 
 
     async function handleDelete(id) {
-        if (window.confirm("Deseja realmente excluir ? ")) {
+        if (window.confirm("Deseja realmente excluir esse usário ? ")) {
             var result = await axios.delete('/api/register/' + id);
             if (result.status === 200) {
+                alert("Usuário excluido com Sucesso");
                 history.push('/listar');
-
-            } else {
-                alert("ERRO ");
-            }
+            } 
         }
 
     }
@@ -44,7 +42,7 @@ function ListarUsuarios() {
 
             <Container>
                 <Label>
-                    Deseja Cadastar um Novo Usuario ?
+                    Deseja Cadastar um Novo Usuário ?
                     <Strong>
                         <Link to="/"> Cadastrar</Link>
                     </Strong>
