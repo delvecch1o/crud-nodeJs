@@ -29,30 +29,11 @@ function CadastrarUsuarios() {
                 alert('Usuário Cadastrado com Sucesso');
                 history.push('/listar');
             })
-           
+
             .catch((error) => {
-               console.log(error.response.data.error)
-            alert("ERRO \n" + error.response.data.error);
-            // alert(error.response.data.error);
+                alert("ERRO \n" + error.response.data.error);
+
             });
-
-
-        /*
-           
-             axios.post('/api/register', data)
-             .then(res => {
-                if(res.status === 201){
-                    alert('Usuario Cadastrado com sucesso');
-                    history.push('/listar'); 
-                } else{
-                    alert('Não foi possivel cadastrar usuario');
-                }
-                
-             });
-    
-             */
-
-
     }
 
 
