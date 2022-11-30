@@ -49,10 +49,10 @@ function validarCPF(cpf) {
         throw new Error('CPF com digitos iguais não pode cadastrar');
     }
     if (!verificaPrimeiroDigito(cpf)) {
-        throw new Error('Verificador do Primeiro digito incorreto');
+        throw new Error('CPF Inválido');
     }
     if (!verificaSegundoDigito(cpf)) {
-        throw new Error('Verificador do Segundo digito incorreto');
+        throw new Error('CPF Inválido');
     }
 
     return cpf
@@ -124,7 +124,7 @@ module.exports = (function () {
             }
         }
         catch (error) {
-            throw new Error('Usuario nao encontrado')
+            throw new Error('Usuário nao encontrado')
         }
 
     }
