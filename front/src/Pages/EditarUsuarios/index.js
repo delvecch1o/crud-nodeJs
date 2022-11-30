@@ -15,18 +15,14 @@ function EditarUsuarios() {
 
     async function getUsers() {
         const response = await axios.get('/api/details/' + idUsuario);
-        // console.log(response.data);
         setNome(response.data.nome);
         setCpf(response.data.cpf);
         setNascimento(response.data.nascimento);
-
     }
 
     useEffect(() => {
         getUsers();
     }, []);
-
-
 
     const submitEdit = (e) => {
         e.preventDefault();
@@ -34,7 +30,7 @@ function EditarUsuarios() {
             setError("Preencha todos os campos");
             return;
         }
-        
+
         const data = {
             nome: nome,
             cpf: cpf,
@@ -48,32 +44,14 @@ function EditarUsuarios() {
                 history.push('/listar');
             })
             .catch((error) => {
-                console.log(error.response.data);
-                // alert('ERRO',data.message);
-                alert("Erro não foi Possível atualizar usuario");
+                alert("Erro \n" + error.response.data.error);
             });
-
-        /*
-
-        axios.put('/api/register/' + idUsuario, data)
-            .then(res => {
-                if (res.status === 200) {
-                    alert("Usuario atualizado com Sucesso")
-                    history.push('/listar');
-                } else {
-                    alert("Não foi possivel atualizar o usuario");
-                }
-
-            });
-            
-            */
 
     }
 
-
     return (
         <Container>
-            <Label>Editar Usuário</Label>
+            <Label>Atualizar dados do Usuário</Label>
             <Form onSubmit={submitEdit} >
                 <Input
                     type='text'
@@ -94,7 +72,7 @@ function EditarUsuarios() {
                 />
 
                 <LabelError>{error}</LabelError>
-                <Button type='submit'>Editar</Button>
+                <Button type='submit'>Atualizar</Button>
                 <LabelLogin>
                     Lista de Usuários Cadastrados
                     <Strong>

@@ -12,13 +12,11 @@ function ListarUsuarios() {
     async function getUsers() {
         const response = await axios.get('/api/register');
         setUsers(response.data)
-       // console.log(response.data)
     }
 
     useEffect(() => {
         getUsers();
     }, []);
-
 
     async function handleDelete(id) {
         if (window.confirm("Deseja realmente excluir esse usário ? ")) {
@@ -26,7 +24,7 @@ function ListarUsuarios() {
             if (result.status === 200) {
                 alert("Usuário excluido com Sucesso");
                 history.push('/listar');
-            } 
+            }
         }
 
     }
@@ -38,49 +36,43 @@ function ListarUsuarios() {
     };
 
     return (
-        <>
 
-            <Container>
-                <Label>
-                    Deseja Cadastar um Novo Usuário ?
-                    <Strong>
-                        <Link to="/"> Cadastrar</Link>
-                    </Strong>
-                </Label>
-                <Table>
-                    <Thead>
-                        <Tr>
-                            <Th>Nome</Th>
-                            <Th>CPF</Th>
-                            <Th>Data de Nascimento</Th>
+        <Container>
+            <Label>
+                Deseja Cadastar um Novo Usuário ?
+                <Strong>
+                    <Link to="/"> Cadastrar</Link>
+                </Strong>
+            </Label>
+            <Table>
+                <Thead>
+                    <Tr>
+                        <Th>Nome</Th>
+                        <Th>CPF</Th>
+                        <Th>Data de Nascimento</Th>
+                    </Tr>
+                </Thead>
+                <Tbody>
+                    {users.map((item, i) => (
+                        <Tr key={i}>
+                            <Td >{item.nome}</Td>
+                            <Td >{item.cpf}</Td>
+                            <Td >{new Date(item.nascimento).toLocaleString('pt-bt')}</Td>
+
+                            <TdIcone alignCenter width="5%">
+                                <FaEdit onClick={() => navegar("/editar/" + item._id)} />
+                            </TdIcone>
+
+                            <TdIcone alignCenter width="5%">
+                                <FaTrash onClick={() => handleDelete(item._id)} />
+                            </TdIcone>
                         </Tr>
-                    </Thead>
-                    <Tbody>
-                        {users.map((item, i) => (
-                            <Tr key={i}>
-                                <Td >{item.nome}</Td>
-                                <Td >{item.cpf}</Td>
-                                <Td >{new Date(item.nascimento).toLocaleString('pt-bt')}</Td>
+                    ))}
 
-                                <TdIcone alignCenter width="5%">
-                                    <FaEdit onClick={() => navegar("/editar/" + item._id)} />
-                                </TdIcone>
+                </Tbody>
+            </Table>
+        </Container>
 
-                                <TdIcone alignCenter width="5%">
-
-                                    <FaTrash onClick={() => handleDelete(item._id)} />
-
-
-                                </TdIcone>
-
-                            </Tr>
-                        ))}
-
-                    </Tbody>
-
-                </Table>
-            </Container>
-        </>
     )
 }
 
